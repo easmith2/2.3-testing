@@ -6,8 +6,8 @@
 require 'csv'
 
 # Required files
-require './classes/user'
-require './classes/machine'
+require_relative 'user'
+require_relative 'machine'
 
 #*****************************************************************************#
 
@@ -23,7 +23,7 @@ class Program
     @user = nil
     @show_acc_menu = false
     @exit_prog = false
-    @data_file = 'user-data/users.csv'
+    @data_file = './user-data/users.csv'
 
     # Create the array of user classes by parsing the supplied data file
     parse_data_file(@data_file)
@@ -234,21 +234,4 @@ class Program
   end
 
 # Closes the class
-end
-
-
-
-
-
-# OK, lets initialize this ATM with a $10,000 balance
-atm = Machine.new
-atm.balance = 10000
-
-
-# This line creates a new instance of the Program.
-program = Program.new(atm)
-
-# This executes the program until the user has decided to exit.
-while program.exit_prog == false
-  program.run
 end
