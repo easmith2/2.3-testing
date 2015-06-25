@@ -1,4 +1,4 @@
-require './classes/machine'
+require './classes/machine_user'
 require './classes/program'
 
 # OK, lets initialize this ATM with a $10,000 balance
