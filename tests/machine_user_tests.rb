@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require '../classes/machine_user'
+require_relative '../classes/machine_user'
 
 class DummyClass
   include Withdrawal

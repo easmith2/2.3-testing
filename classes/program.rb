@@ -15,7 +15,7 @@ class Program
   MAIN_MENU = ['1: Login to your account', '2: View ATM balance', '3: Exit program'].freeze
   ACC_MENU = ['1: Check balance', '2: Make withdrawal', '3: Log out of your account'].freeze
 
-  attr_accessor :user, :atm
+  attr_accessor :user, :atm, :exit_prog, :show_acc_menu
 
  def initialize(machine)
     @atm = machine
@@ -23,7 +23,7 @@ class Program
     @user = nil
     @show_acc_menu = false
     @exit_prog = false
-    @data_file = '../user-data/users.csv'
+    @data_file = './user-data/users.csv'
 
     # Create the array of user classes by parsing the supplied data file
     parse_data_file(@data_file)
@@ -64,29 +64,29 @@ class Program
     # Main Menu option 2 is to view the ATM's available balance.
     when 2
       # This code should view the atm's current balance
-      puts "This ATM currently has $#{@atm.balance}"
+      puts "This ATM currently has $#{@atm.balance}."
       puts ""
 
     # Main Menu option 3 is to exit the ATM program.
     when 3
       # The user would like to exit the program entirely.
-      @exit_prog = true
+      self.exit_prog = true
       puts "Now exiting the ATM program. Goobye."
       puts ""
 
     # This else should be theoretically impossible.
     else
       display_error()
-      @exit_prog = true
+      self.exit_prog = true
       status[:error] = "Fatal Error"
     end
     status
   end
 
-  # We need to access @exit_prog's value outside of the class. Let's make a getter
-  def exit_prog
-    @exit_prog
-  end
+  # # We need to access self.exit_prog's value outside of the class. Let's make a getter
+  # def exit_prog
+  #   self.exit_prog
+  # end
 
   # This method displays input prompt and returns the value input as a string.
   # Loops until input is given.
@@ -111,8 +111,7 @@ class Program
   def get_login_info
     name = get_input("Please enter your name")
     pin = get_input("Please enter your pin")
-    login = { name: name, pin: pin}
-   login
+    { name: name, pin: pin }
   end
 
   # This method displays a menu and verifies that the
@@ -164,7 +163,7 @@ class Program
     case acc_menu_sel
     # Account Menu option 1 indicates the user wants to check their balance.
     when 1
-      puts "Your current account balance is: $#{@user.balance}"
+      puts "Your current account balance is $#{@user.balance}."
       puts ""
     # Account Menu option 2 indicates the user would like to withdraw funds
     when 2
@@ -172,9 +171,9 @@ class Program
       withdraw_funds()
     # Account Menu option 3 indicates the user would like to log out
     when 3
-      @show_acc_menu = false
       puts "Returning to the Main Menu."
       puts ""
+      @show_acc_menu = false
     # If menu options 1-3 have failed, the world might end. Display an error
     else
       display_error()
