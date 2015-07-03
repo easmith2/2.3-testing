@@ -103,8 +103,7 @@ class Program
 
   # Extract gets.chomp for easier testing purposes.
   def chomp
-    var = gets.chomp
-    return var
+    gets.chomp
   end
 
   # Gathers the user's login and pin information

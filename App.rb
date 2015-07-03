@@ -10,6 +10,4 @@ atm.balance = 10000
 program = Program.new(atm)
 
 # This executes the program until the user has decided to exit.
-while program.exit_prog == false
-  program.run
-end
+program.run until program.exit_prog == true

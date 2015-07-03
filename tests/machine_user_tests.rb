@@ -31,11 +31,11 @@ class TestWithdrawal < MiniTest::Test
   end
 
   def test_can_withdraw_no_amount_explodes
-    assert_raises (ArgumentError) { @d.can_withdraw?() }
+    assert_raises (TypeError) { @d.can_withdraw?() }
   end
 
   def test_can_withdraw_not_a_fixnum_explodes
-    assert_raises(ArgumentError) { @d.can_withdraw?('abcd') }
+    assert_raises(TypeError) { @d.can_withdraw?('abcd') }
   end
 
   # Testing deduct method
@@ -48,7 +48,7 @@ class TestWithdrawal < MiniTest::Test
   end
 
   def test_deduct_not_a_fixnum_explodes
-    assert_raises(ArgumentError) { @d.deduct("one hundred") }
+    assert_raises(TypeError) { @d.deduct("one hundred") }
   end
 end
 

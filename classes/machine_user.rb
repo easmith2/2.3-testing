@@ -2,14 +2,13 @@ module Withdrawal
 
   # Verify that the user can withdraw the requested amount
   def can_withdraw?(amt)
-    raise ArgumentError.new('Argument is not numeric') unless amt.is_a? Fixnum
-    self.balance >= amt && amt > 0
-    #amt.is_a? Fixnum ? true : false
+    raise TypeError.new('Argument is not numeric') unless amt.is_a? Fixnum
+    amt > 0 && self.balance >= amt
   end
 
   # Update the balance
   def deduct(amt)
-    raise ArgumentError.new('Argument is not numeric') unless amt.is_a? Fixnum
+    raise TypeError.new('Argument is not numeric') unless amt.is_a? Fixnum
     self.balance -= amt.abs
   end
 
